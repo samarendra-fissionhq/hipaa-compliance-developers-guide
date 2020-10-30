@@ -44,6 +44,8 @@ If you are sending email communications that include or might include protected 
 ### Database/API calls
 If your application is relying on data from any covered entity (such as a doctor's office) it will have to be compliant. Same goes for any integration you need to do with a business associate of a covered entity.
 
+PHI data sent/received by your app to/from a business associate or a covered entity should be done in a secure channel(eg: HTTPS) to adhere to "encryption in transit". All the HTTP or WS requests should be secured with TLS/SSL.
+
 If your app is not compliant these covered entities will not be able to grant your app access to make API or database calls, nor can you search and read anything within their database.
 
 Captain obvious says "This greatly limits the functionality of your application."
@@ -55,6 +57,12 @@ As we have said before, mobile phones are particularly insecure devices and the 
 If you’re using notifications in your mobile app, it’s critical that you do not include any PHI in any push notifications from your app as they can appear and be publicly visible even when a phone is locked.
 
 This goes beyond just mobile push notifications. Any time you’re making an automated, outbound push message (whether it be mobile, email, or automated calling) the same rules apply. Make sure you evaluate all communication touch points for potential PHI/HIPAA issues.
+
+## Data encryption
+
+PHI data stored locally on mobile apps needs to be encrypted to adhere to "encryption at rest". It's best to store data as little as possible on device local storage. Unfortunately, this strategy is not ideal when apps must support off-line capabilities.
+
+Consider encrypting the data when stored on local storage and decrypting when loading it into memory(ram/active storage). Most common encryption algorithm is AES-256 which can be used in iOS and Android apps.
 
 ## Physical phone security
 
